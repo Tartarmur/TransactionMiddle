@@ -1,13 +1,13 @@
 package ru.netology
 
 fun main() {
-    var comissionLimit = checkLimit(150_000, 600_000, 0, 150_000)
+    var comissionLimit = checkLimit(150_000, 600_000, 0, 0, 150_000)
     var comissionType = checkTypeCard("Master Card", 35, 0.0075, 0.006,20, 75_000, comissionLimit , 150_000)
 }
 
-fun checkLimit (limitDays: Int, limitMonth: Int, previousOperationsMonth: Int, amountTransaction : Int) : Boolean {
+fun checkLimit (limitDays: Int, limitMonth: Int, previousOperationsMonth: Int, previousOperationsDay: Int, amountTransaction : Int) : Boolean {
     var possibleTrascation = when {
-        previousOperationsMonth > limitMonth || amountTransaction > limitDays -> false
+        previousOperationsMonth + amountTransaction > limitMonth || amountTransaction + previousOperationsDay > limitDays -> false
         else -> true
     }
     return possibleTrascation
